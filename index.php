@@ -1,31 +1,29 @@
 <?
-try {
-    $conn = new PDO("mysql:host=MySQL-8.2", "root", "");
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
+if(isset($_POST['submit']) && isset($_POST['username']) && isset($_POST['userage'])) {
 
-    // $sql = "CREATE DATABASE if not exists Users";
-    // $conn->exec($sql);
-    // echo "Database created successfully";
+    $username = htmlentities($_POST['username']);
+    $userage = htmlentities($_POST['userage']);
 
-    $sql = "USE Users; INSERT INTO users (name, age) VALUES 
-	('John Doe', 3),
-	('Jane Doe', 4),
-	('John Doe', 5),
-	('Jane Doe', 6),
-	('John Doe', 7),
-	('Jane Doe', 8),
-	('John Doe', 9),
-	('Jane Doe', 10),
-	('John Doe', 11),
-	('Jane Doe', 12),
-	('John Doe', 13),
-	('Jane Doe', 14)
-	";
-    $conn->exec($sql);
-    echo "Table created successfully";
-    $conn = null;
-}
-catch(PDDException $e) {
+    try {
+        $conn = new PDO("mysql:host=MySQL-8.2;dbname=Users", "root", "");
+        echo "Connected successfully";
+        
+        $sql = "INSERT INTO `users` (`name`, `age`) VALUES ('$username', $userage)";
+        $rowsAdded = $conn->exec($sql);
+        if ($rowsAdded > 0) {
+            echo "Данные успешно добавлены - Имя: $username, Возраст: $userage";
+        }  
+    }
+    catch(PDOException $e) {
+    // Выводит сообщение об ошибке
     echo "Connection failed: " . $e->getMessage();
+    }
 }
+?>
+
+<h4>Создание нового пользователя</h4>
+<form method="post">
+    <input name="username" placeholder="Имя" id="username">
+    <input type="number" name="userage" placeholder="Возраст" id="userage">
+    <input type="submit" name="submit" value = "Save">
+</form>
