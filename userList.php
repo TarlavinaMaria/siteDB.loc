@@ -31,10 +31,11 @@ try {
             echo "<td>{$row['name']}</td>";
             echo "<td><a href='userinfo.php?id={$row['user_id']}'>More info ...</a></td>";
             echo "<td>
-                <form method='post'>
+                <form method='post' style='display:inline;'>
                     <input type='hidden' name='id' value='{$row['user_id']}'>
                     <input type='submit' value='Delete' name='del_user'>
                 </form>
+                <a href='edituser.php?id={$row['user_id']}'>Edit</a>
             </td>";
 
             echo "</tr>";
@@ -54,7 +55,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Список пользователей</title>
 </head>
 
 <body>

@@ -29,9 +29,7 @@ try {
     <?
     } else {
         echo "Пользователь не найден";
-
     }
-
 
 } catch (PDOException $e) {
     // Выводит сообщение об ошибке
@@ -45,7 +43,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Информация о пользователе</title>
 </head>
 
 <body>
